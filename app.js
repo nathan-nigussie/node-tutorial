@@ -1,22 +1,19 @@
+//another apprach of promise using 'util' refer 4-app.js
+const {readFile,writeFile}=require('fs')
+const util=require('util')
 
-//synchronous approach or blocking approach
-// const {readFileSync,writeFileSync}=require('fs')
-// const first=readFileSync('./content/subfolder/first.txt','utf8');
+const readFilePromise=util.promisify(readFile)
+const writeFilePromise=util.promisify(writeFile)
 
-// const second=readFileSync('./content/subfolder/second.txt','utf8')
+const start=async () => {
+    try {
+        const first=await (readFilePromise('./content/subfolder/first.txt','utf8'))
+        const second=await (readFilePromise('./content/subfolder/second.txt','utf8'))
+        console.log(first,second)
+        await writeFilePromise('./content/subfolder/noad-exercise.txt',`I am interested with this course:${first},${second}`)
+    } catch(error) {
+        console.log(error)
+    }
+}
 
-
-// writeFileSync(
-//     './content/subfolder/result-sync.txt',
-//     `Here is the result file:${first},${second}`,{flag: 'a'}
-// )
-
-
-//console.log(first,second);
-
-//$ npm run dev allow us to see our chages of coding live without restarting
-const _=require('lodash')
-const items=[1,[2,[3,[4]]]]
-const newItems=_.flattenDeep(items)
-console.log(newItems)
-console.log("hello Nathan")
+start()
