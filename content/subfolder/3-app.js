@@ -15,6 +15,7 @@
 //npm init -y(everything default)
 // npm i (install specific dependecines with its name) e.g npm i lodash   installs lodash dependencies
 
+// npm i nodemon --save-dev  or npm i nodemon -D { to install dev dependencies }
 
 const http=require('http')
 
